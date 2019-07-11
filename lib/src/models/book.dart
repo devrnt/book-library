@@ -8,7 +8,7 @@ class Book {
   Book(this.title, this.author, this.description, this.coverUrl, this.category);
 }
 
-final books = [
+final initialBooks = [
   Book(
     'The Doe in the Forest',
     'Laurel Toven',
@@ -30,3 +30,11 @@ final books = [
     'Drama',
   ),
 ];
+
+final bookToAdd = Book(
+  'Harry Potter',
+  'JK Rowling',
+  'In an age with kings and kings',
+  'https://www.harrypotterfanzone.com/article/wp-content/uploads/2018/11/jonny-duddle-goblet-of-fire-cover.png',
+  'Fantasy',
+);
