@@ -1,9 +1,7 @@
 import 'package:book_library/src/models/book.dart';
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
 import 'package:book_library/src/screens/book/book_add.dart';
-import 'package:book_library/src/widgets/book_list.dart';
 import 'package:flutter/material.dart';
-import 'package:image_test_utils/image_test_utils.dart';
 import 'package:provider/provider.dart';
 
 import 'package:flutter_test/flutter_test.dart';
