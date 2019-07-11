@@ -1,5 +1,5 @@
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
-import 'package:book_library/src/screens/book/book_details.dart';
+import 'package:book_library/src/widgets/book_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,18 +8,17 @@ class BookList extends StatelessWidget {
   Widget build(BuildContext context) {
     var bookNotifier = Provider.of<BookNotifier>(context);
 
-    return ListView(
-      children: [
-        for (var book in bookNotifier.books)
-          ListTile(
-            title: Text('${book.title}'),
-            subtitle: Text('by ${book.author}'),
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => BookDetails(book)));
-            },
-          )
-      ],
+    return ListView.separated(
+      separatorBuilder: ((context, index) {
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 22.0),
+          child: Divider(),
+        );
+      }),
+      itemCount: bookNotifier.books.length,
+      itemBuilder: ((context, index) {
+        return BookItem(bookNotifier.books[index]);
+      }),
     );
   }
 }
