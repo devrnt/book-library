@@ -21,4 +21,9 @@ class BookNotifier extends ChangeNotifier {
     set(_books..add(book));
     return book;
   }
+
+  Book removeBook(Book book) {
+    set(_books..remove(book));
+    return book;
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
+import 'package:book_library/src/screens/book_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,10 @@ class BookList extends StatelessWidget {
           ListTile(
             title: Text('${book.title}'),
             subtitle: Text('by ${book.author}'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => BookDetails(book)));
+            },
           )
       ],
     );
