@@ -1,5 +1,5 @@
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
-import 'package:book_library/src/screens/book_details.dart';
+import 'package:book_library/src/screens/book/book_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

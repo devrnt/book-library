@@ -1,23 +1,19 @@
-import 'package:book_library/src/models/book.dart';
-import 'package:book_library/src/models/notifiers/book_notifier.dart';
-import 'package:book_library/src/widgets/book_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:book_library/src/screens/book/book_add.dart';
+import 'package:book_library/src/widgets/book_list.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var bookNotifier = Provider.of<BookNotifier>(context);
-
     return Scaffold(
       appBar: appBar,
       body: Container(
         child: BookList(),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.plus_one),
+        child: Icon(Icons.add),
         onPressed: () {
-          bookNotifier.addBook(bookToAdd);
+          Navigator.push(context, MaterialPageRoute(builder: (_) => BookAdd()));
         },
       ),
     );
