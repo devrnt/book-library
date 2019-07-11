@@ -8,22 +8,22 @@ import 'package:flutter/cupertino.dart';
 class BookNotifier extends ChangeNotifier {
   List<Book> _books;
   List<Book> get books => _books;
-  set(List<Book> books) {
+  set books(List<Book> books) {
     _books = books;
     notifyListeners();
   }
 
   BookNotifier() {
-    set(initialBooks);
+    _books = initialBooks;
   }
 
   Book addBook(Book book) {
-    set(_books..add(book));
+    books = (_books..add(book));
     return book;
   }
 
   Book removeBook(Book book) {
-    set(_books..remove(book));
+    books = (_books..remove(book));
     return book;
   }
 }
