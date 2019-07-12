@@ -104,8 +104,9 @@ class _AddBookFormState extends State<AddBookForm> {
               onPressed: () {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
+                  // TODO: replace rating with a Slider
                   final book =
-                      Book(_title, _author, _description, _coverUrl, _category);
+                      Book(_title, _author, _description, _coverUrl, _category, 7.0);
 
                   bookNotifier.addBook(book);
                   Navigator.pop(context);

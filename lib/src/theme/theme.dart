@@ -17,7 +17,7 @@ class Theme {
     return TextTheme(
       title: TextStyle(
         fontFamily: 'Nunito',
-        fontSize: 24,
+        fontSize: 23,
         fontWeight: FontWeight.w700,
         color: kTextTitleColor,
       ),
