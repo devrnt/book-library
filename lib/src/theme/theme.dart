@@ -10,6 +10,11 @@ class Theme {
       primaryColor: kPrimaryColor,
       scaffoldBackgroundColor: kPrimaryColor,
       appBarTheme: _appBarTheme,
+      floatingActionButtonTheme: _fabTheme,
+      errorColor: kErrorColor,
+      buttonTheme: base.buttonTheme.copyWith(
+        buttonColor: kButtonColor,
+      ),
     );
   }
 
@@ -46,6 +51,15 @@ class Theme {
           color: kTextTitleColor,
         ),
       ),
+      iconTheme: IconThemeData(
+        color: kTextTitleColor,
+      ),
+    );
+  }
+
+  static FloatingActionButtonThemeData get _fabTheme {
+    return FloatingActionButtonThemeData(
+      backgroundColor: kAccentColor,
     );
   }
 }

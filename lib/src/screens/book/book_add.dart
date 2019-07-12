@@ -1,5 +1,7 @@
 import 'package:book_library/src/models/book.dart';
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
+import 'package:book_library/src/widgets/buttons/confirm_button.dart';
+import 'package:book_library/src/widgets/inputs/book_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -48,71 +50,46 @@ class _AddBookFormState extends State<AddBookForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Title'),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Enter a book title';
-              }
-              return null;
-            },
+          BookTextFormField(
+            labelText: 'Title',
+            errorText: 'Enter a book title',
             onSaved: (value) => _title = value,
           ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Author'),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Enter the author';
-              }
-              return null;
-            },
+          BookTextFormField(
+            labelText: 'Author',
+            errorText: 'Enter an author',
             onSaved: (value) => _author = value,
           ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Desciption'),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Enter the description';
-              }
-              return null;
-            },
+          BookTextFormField(
+            labelText: 'Description',
+            errorText: 'Enter a description',
             onSaved: (value) => _description = value,
           ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Cover url'),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Enter the cover url';
-              }
-              return null;
-            },
+          BookTextFormField(
+            labelText: 'Cover url',
+            errorText: 'Enter a cover url',
             onSaved: (value) => _coverUrl = value,
           ),
-          TextFormField(
-            decoration: InputDecoration(labelText: 'Category'),
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Enter the category';
-              }
-              return null;
-            },
+          BookTextFormField(
+            labelText: 'Category',
+            errorText: 'Enter a category',
             onSaved: (value) => _category = value,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
+            padding: const EdgeInsets.only(top: 22.0),
+            child: ConfirmButton(
+              text: 'Add Book',
               onPressed: () {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
                   // TODO: replace rating with a Slider
-                  final book =
-                      Book(_title, _author, _description, _coverUrl, _category, 7.0);
+                  final book = Book(
+                      _title, _author, _description, _coverUrl, _category, 7.0);
 
                   bookNotifier.addBook(book);
                   Navigator.pop(context);
                 }
               },
-              child: Text('ADD'),
             ),
           ),
         ],
