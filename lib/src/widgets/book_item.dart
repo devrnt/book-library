@@ -12,6 +12,7 @@ class BookItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () {
         Navigator.push(
             context, MaterialPageRoute(builder: (_) => BookDetails(_book)));

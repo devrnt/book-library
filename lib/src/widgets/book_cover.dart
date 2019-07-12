@@ -16,7 +16,7 @@ class BookCover extends StatelessWidget {
         shape: BoxShape.rectangle,
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withOpacity(0.20),
             blurRadius: 20,
             offset: Offset(0, 10),
           )

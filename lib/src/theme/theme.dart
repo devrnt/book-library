@@ -22,19 +22,19 @@ class Theme {
     return TextTheme(
       title: TextStyle(
         fontFamily: 'Nunito',
-        fontSize: 23,
+        fontSize: 22,
         fontWeight: FontWeight.w700,
         color: kTextTitleColor,
       ),
       caption: TextStyle(
         fontFamily: 'Nunito',
-        fontSize: 18,
+        fontSize: 17.0,
         color: kGreyColor,
         fontWeight: FontWeight.w500,
       ),
       subtitle: TextStyle(
         fontFamily: 'Nunito',
-        fontSize: 18.0,
+        fontSize: 17.0,
         color: kAccentColor,
       ),
     );
