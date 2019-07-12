@@ -19,11 +19,11 @@ class BookTextFormField extends StatelessWidget {
         labelText: labelText,
         errorStyle: TextStyle(
           fontSize: 15.0,
-          height: 0.9
+          height: 0.9,
         ),
       ),
       validator: (value) {
-        if (value.isEmpty) {
+        if (value.isEmpty || value.trim().isEmpty) {
           return errorText;
         }
         return null;

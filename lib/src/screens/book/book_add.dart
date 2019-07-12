@@ -46,7 +46,6 @@ class _AddBookFormState extends State<AddBookForm> {
 
     return Form(
       key: _formKey,
-      autovalidate: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
