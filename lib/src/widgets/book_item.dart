@@ -1,8 +1,8 @@
 import 'package:book_library/src/models/book.dart';
 import 'package:book_library/src/screens/book/book_details.dart';
-import 'package:book_library/src/theme/colors.dart';
+import 'package:book_library/src/widgets/book_cover.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:book_library/src/widgets/star_rating.dart';
 
 class BookItem extends StatelessWidget {
   final Book _book;
@@ -17,14 +17,14 @@ class BookItem extends StatelessWidget {
             context, MaterialPageRoute(builder: (_) => BookDetails(_book)));
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
-        height: 280.0,
+        margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 25.0),
+        height: 260.0,
         child: Row(
           children: [
             Flexible(
               fit: FlexFit.tight,
               flex: 4,
-              child: bookCover,
+              child: BookCover(url: _book.coverUrl),
             ),
             Flexible(
               flex: 6,
@@ -50,7 +50,10 @@ class BookItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    smoothStarRating,
+                    StarRating(
+                      starCount: 5,
+                      rating: (_book.rating / 2).toDouble(),
+                    ),
                     Text(
                       '${_book.category}',
                       style: Theme.of(context).textTheme.subtitle,
@@ -62,59 +65,6 @@ class BookItem extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget get bookCover {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            blurRadius: 20,
-            offset: Offset(0, 10),
-          )
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: FadeInImage.assetNetwork(
-          placeholder: 'assets/images/book-cover-placeholder.png',
-          image: _book.coverUrl,
-          fit: BoxFit.fitWidth,
-          alignment: Alignment.topCenter,
-          fadeInDuration: const Duration(milliseconds: 350),
-        ),
-      ),
-    );
-  }
-
-  Widget get smoothStarRating {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        SmoothStarRating(
-          size: 20.0,
-          // FIXME: Is this an issue in the SmoothStarRating package
-          allowHalfRating: false,
-          starCount: 5,
-          rating: (_book.rating / 2).toDouble(),
-          color: kYellow,
-          borderColor: kYellow.withOpacity(0.5),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Text(
-            '${_book.rating}',
-            style: TextStyle(
-              color: kYellow,
-              fontSize: 16.0,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

@@ -9,6 +9,7 @@ class BookList extends StatelessWidget {
     var bookNotifier = Provider.of<BookNotifier>(context);
 
     return ListView.separated(
+      physics: BouncingScrollPhysics(),
       separatorBuilder: ((context, index) {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 22.0),
