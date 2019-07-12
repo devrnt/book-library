@@ -1,6 +1,8 @@
 import 'package:book_library/src/models/book.dart';
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
 import 'package:book_library/src/screens/book/book_add.dart';
+import 'package:book_library/src/widgets/buttons/confirm_button.dart';
+import 'package:book_library/src/widgets/inputs/book_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,7 +27,7 @@ void main() {
       );
 
       // Assert
-      expect(find.byType(RaisedButton), findsOneWidget);
+      expect(find.byType(ConfirmButton), findsOneWidget);
     });
 
     testWidgets('Adding book adds it to the list of books', (tester) async {
@@ -44,11 +46,11 @@ void main() {
         ),
       );
 
-      final inputTitle = find.byType(TextFormField).at(0);
-      final inputAuthor = find.byType(TextFormField).at(1);
-      final inputDescription = find.byType(TextFormField).at(2);
-      final inputCoverUrl = find.byType(TextFormField).at(3);
-      final inputCategory = find.byType(TextFormField).at(4);
+      final inputTitle = find.byType(BookTextFormField).at(0);
+      final inputAuthor = find.byType(BookTextFormField).at(1);
+      final inputDescription = find.byType(BookTextFormField).at(2);
+      final inputCoverUrl = find.byType(BookTextFormField).at(3);
+      final inputCategory = find.byType(BookTextFormField).at(4);
 
       await tester.enterText(inputTitle, 'Some text');
       await tester.enterText(inputAuthor, 'Some text');
@@ -57,7 +59,7 @@ void main() {
       await tester.enterText(inputCategory, 'Some text');
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byType(RaisedButton));
+      await tester.tap(find.byType(ConfirmButton));
       await tester.pumpAndSettle();
 
       // Assert

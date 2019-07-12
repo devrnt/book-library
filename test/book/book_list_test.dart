@@ -1,5 +1,6 @@
 import 'package:book_library/src/models/book.dart';
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
+import 'package:book_library/src/widgets/book_item.dart';
 import 'package:book_library/src/widgets/book_list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_test_utils/image_test_utils.dart';
@@ -11,23 +12,25 @@ void main() {
   group('Book List Widget', () {
     testWidgets('Displays all the books supplied by the notifier',
         (tester) async {
-      // Arrange
-      var bookNotifier = BookNotifier()..books = initialBooks;
+      provideMockedNetworkImages(() async {
+        // Arrange
+        var bookNotifier = BookNotifier()..books = initialBooks;
 
-      // Act
-      await tester.pumpWidget(
-        ChangeNotifierProvider<BookNotifier>(
-          builder: (_) => bookNotifier,
-          child: MaterialApp(
-            home: Scaffold(
-              body: BookList(),
+        // Act
+        await tester.pumpWidget(
+          ChangeNotifierProvider<BookNotifier>(
+            builder: (_) => bookNotifier,
+            child: MaterialApp(
+              home: Scaffold(
+                body: BookList(),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      // Assert
-      expect(find.byType(ListTile), findsNWidgets(3));
+        // Assert
+        expect(find.byType(BookItem, skipOffstage: false), findsNWidgets(3));
+      });
     });
 
     testWidgets('Displays no books when the supplied books list is empty',
@@ -69,7 +72,7 @@ void main() {
           ),
         );
 
-        await tester.tap(find.byType(ListTile).first);
+        await tester.tap(find.byType(BookItem).first);
         await tester.pumpAndSettle();
 
         // Assert
