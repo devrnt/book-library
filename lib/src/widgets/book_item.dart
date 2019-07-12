@@ -109,7 +109,7 @@ class BookItem extends StatelessWidget {
             '${_book.rating}',
             style: TextStyle(
               color: kYellow,
-              fontSize: 17.0,
+              fontSize: 16.0,
               fontWeight: FontWeight.w600,
             ),
           ),

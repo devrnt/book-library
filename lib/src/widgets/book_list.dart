@@ -12,7 +12,10 @@ class BookList extends StatelessWidget {
       separatorBuilder: ((context, index) {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 22.0),
-          child: Divider(),
+          child: Divider(
+            color: Colors.grey.withOpacity(0.3),
+            height: 18.0,
+          ),
         );
       }),
       itemCount: bookNotifier.books.length,
