@@ -1,6 +1,6 @@
 # Book Library
 
-Book Library application where u can add and remove a book.
+Book Library application where u can make simple CRUD operations (create, read, update, delete).
 This simple application demonstrates the use of the `Provider` package in specific the `ChangeNotifierProvider`.
 I make use of a simple model, together with a `Notifier` class which extends from `ChangeNotifier`.
 
