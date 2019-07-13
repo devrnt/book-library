@@ -1,3 +1,4 @@
+import 'package:book_library/src/screens/book/book_add.dart';
 import 'package:book_library/src/widgets/book_cover.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +16,7 @@ class BookDetails extends StatelessWidget {
     var bookNotifier = Provider.of<BookNotifier>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Details'),
-      ),
+      appBar: _buildAppBar(context),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
@@ -103,6 +102,27 @@ class BookDetails extends StatelessWidget {
         //   Navigator.of(context).pop();
         // },
       ),
+    );
+  }
+
+  AppBar _buildAppBar(BuildContext context) {
+    return AppBar(
+      title: Text('Details'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.edit,
+            size: 22.0,
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => BookAdd(book: _book),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 

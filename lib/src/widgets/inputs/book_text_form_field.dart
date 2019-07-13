@@ -4,16 +4,19 @@ class BookTextFormField extends StatelessWidget {
   final String labelText;
   final String errorText;
   final Function onSaved;
+  final String initialValue;
 
   BookTextFormField({
     @required this.labelText,
     @required this.errorText,
     @required this.onSaved,
+    this.initialValue,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      initialValue: initialValue,
       style: Theme.of(context).textTheme.caption.copyWith(fontSize: 16.0),
       decoration: InputDecoration(
         labelText: labelText,

@@ -26,4 +26,20 @@ class BookNotifier extends ChangeNotifier {
     books = (_books..remove(book));
     return book;
   }
+
+  Book updateBook(Book oldBook, Book newBook) {
+    // TODO: Give a book an unique property so we can search in the books
+    // and update the properties with the updated version
+    oldBook.author = newBook.author;
+    oldBook.category = newBook.category;
+    oldBook.coverUrl = newBook.coverUrl;
+    oldBook.description = newBook.description;
+    oldBook.rating = newBook.rating;
+    oldBook.title = newBook.title;
+
+    final index = books.indexOf(oldBook);
+    books[index] = newBook;
+    notifyListeners();
+    return newBook;
+  }
 }

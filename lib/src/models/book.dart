@@ -1,10 +1,10 @@
 class Book {
-  final String title;
-  final String author;
-  final String description;
-  final String coverUrl;
-  final String category;
-  final num rating;
+  String title;
+  String author;
+  String description;
+  String coverUrl;
+  String category;
+  num rating;
 
   Book(this.title, this.author, this.description, this.coverUrl, this.category,
       this.rating);

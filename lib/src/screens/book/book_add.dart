@@ -5,12 +5,11 @@ import 'package:book_library/src/widgets/inputs/book_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BookAdd extends StatefulWidget {
-  @override
-  _BookAddState createState() => _BookAddState();
-}
+class BookAdd extends StatelessWidget {
+  final Book book;
 
-class _BookAddState extends State<BookAdd> {
+  BookAdd({this.book});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +19,7 @@ class _BookAddState extends State<BookAdd> {
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(12.0),
-          child: AddBookForm(),
+          child: AddBookForm(book: book),
         ),
       ),
     );
@@ -28,6 +27,10 @@ class _BookAddState extends State<BookAdd> {
 }
 
 class AddBookForm extends StatefulWidget {
+  final Book book;
+
+  AddBookForm({this.book});
+
   @override
   _AddBookFormState createState() => _AddBookFormState();
 }
@@ -52,41 +55,52 @@ class _AddBookFormState extends State<AddBookForm> {
           BookTextFormField(
             labelText: 'Title',
             errorText: 'Enter a book title',
+            initialValue: widget.book?.title,
             onSaved: (value) => _title = value,
           ),
           BookTextFormField(
             labelText: 'Author',
             errorText: 'Enter an author',
             onSaved: (value) => _author = value,
+            initialValue: widget.book?.author,
           ),
           BookTextFormField(
             labelText: 'Description',
             errorText: 'Enter a description',
+            initialValue: widget.book?.description,
             onSaved: (value) => _description = value,
           ),
           BookTextFormField(
             labelText: 'Cover url',
             errorText: 'Enter a cover url',
+            initialValue: widget.book?.coverUrl,
             onSaved: (value) => _coverUrl = value,
           ),
           BookTextFormField(
             labelText: 'Category',
             errorText: 'Enter a category',
+            initialValue: widget.book?.category,
             onSaved: (value) => _category = value,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 22.0),
             child: ConfirmButton(
-              text: 'Add Book',
+              text: widget.book == null ? 'Add Book' : 'Update Book',
               onPressed: () {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
-                  // TODO: replace rating with a Slider
                   final book = Book(
                       _title, _author, _description, _coverUrl, _category, 7.0);
 
-                  bookNotifier.addBook(book);
-                  Navigator.pop(context);
+                  if (widget.book == null) {
+                    // TODO: replace rating with a Slider
+
+                    bookNotifier.addBook(book);
+                    Navigator.pop(context);
+                  } else {
+                    bookNotifier.updateBook(widget.book, book);
+                    Navigator.of(context).pop();
+                  }
                 }
               },
             ),

@@ -25,7 +25,7 @@ class ConfirmButton extends StatelessWidget {
         textColor: Colors.white.withOpacity(0.9),
         onPressed: onPressed,
         child: Text(
-          'Add Book',
+          text,
           style: TextStyle(
             fontSize: 18.0,
             fontFamily: 'Nunito',
