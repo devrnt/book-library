@@ -1,4 +1,3 @@
-import 'package:book_library/src/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmButton extends StatelessWidget {
@@ -21,7 +20,7 @@ class ConfirmButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(6.0),
         ),
-        color: kButtonColor,
+        color: Theme.of(context).buttonColor,
         textColor: Colors.white.withOpacity(0.9),
         onPressed: onPressed,
         child: Text(

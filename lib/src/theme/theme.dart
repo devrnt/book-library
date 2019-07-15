@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:book_library/src/theme/colors.dart';
 
 class Theme {
+  static final ThemeData baseLight = ThemeData.light();
+  static final ThemeData baseDark = ThemeData.dark();
+
   static ThemeData get lightTheme {
-    final ThemeData base = ThemeData.light();
-    return base.copyWith(
+    return baseLight.copyWith(
       textTheme: _lightTextTheme,
       accentColor: kAccentColor,
       primaryColor: kPrimaryColor,
@@ -12,9 +14,7 @@ class Theme {
       appBarTheme: _appBarTheme,
       floatingActionButtonTheme: _fabTheme,
       errorColor: kErrorColor,
-      buttonTheme: base.buttonTheme.copyWith(
-        buttonColor: kButtonColor,
-      ),
+      buttonColor: kAccentColor,
     );
   }
 
@@ -57,9 +57,63 @@ class Theme {
     );
   }
 
-  static FloatingActionButtonThemeData get _fabTheme {
-    return FloatingActionButtonThemeData(
-      backgroundColor: kAccentColor,
+  static FloatingActionButtonThemeData get _fabTheme =>
+      FloatingActionButtonThemeData(backgroundColor: kAccentColor);
+
+  static ThemeData get darkTheme {
+    return baseDark.copyWith(
+      textTheme: _darkTextTheme,
+      accentColor: kAccentColorDark,
+      primaryColor: kPrimaryColorDark,
+      scaffoldBackgroundColor: kPrimaryColorDark,
+      appBarTheme: _appBarThemeDark,
+      floatingActionButtonTheme: _fabThemeDark,
+      errorColor: kErrorColorDark,
+      buttonColor: kAccentColorDark,
+    );
+  }
+
+  static TextTheme get _darkTextTheme {
+    return TextTheme(
+      title: TextStyle(
+        fontFamily: 'Nunito',
+        fontSize: 22,
+        fontWeight: FontWeight.w700,
+        color: Colors.white,
+      ),
+      caption: TextStyle(
+        fontFamily: 'Nunito',
+        fontSize: 17.0,
+        color: kGreyColorDark,
+        fontWeight: FontWeight.w500,
+      ),
+      subtitle: TextStyle(
+        fontFamily: 'Nunito',
+        fontSize: 17.0,
+        color: kAccentColorDark,
+      ),
+    );
+  }
+
+  static FloatingActionButtonThemeData get _fabThemeDark =>
+      FloatingActionButtonThemeData(
+          backgroundColor: kAccentColorDark, foregroundColor: Colors.white);
+
+
+static AppBarTheme get _appBarThemeDark {
+    return AppBarTheme(
+      elevation: 0,
+      color: kPrimaryColorDark,
+      textTheme: _darkTextTheme.copyWith(
+        title: TextStyle(
+          fontSize: 22.0,
+          fontWeight: FontWeight.w600,
+          color: kTextTitleColorDark,
+        ),
+      ),
+      iconTheme: IconThemeData(
+        color: kTextTitleColorDark,
+      ),
     );
   }
 }

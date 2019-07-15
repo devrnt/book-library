@@ -1,22 +1,27 @@
+import 'package:book_library/src/models/notifiers/theme_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BookCover extends StatelessWidget {
   final String url;
   final BoxFit boxFit;
   final double height;
 
-  BookCover(
-      {@required this.url, this.boxFit = BoxFit.fitWidth, this.height});
+  BookCover({@required this.url, this.boxFit = BoxFit.fitWidth, this.height});
 
   @override
   Widget build(BuildContext context) {
+    var themeNotifier = Provider.of<ThemeNotifier>(context);
+
     return Container(
       height: height,
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: Colors.black.withOpacity(0.20),
+            color: themeNotifier.darkModeEnabled
+                ? Colors.black.withOpacity(0.40)
+                : Colors.black.withOpacity(0.20),
             blurRadius: 20,
             offset: Offset(0, 10),
           )

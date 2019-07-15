@@ -17,14 +17,17 @@ class BookTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       initialValue: initialValue,
-      style: Theme.of(context).textTheme.caption.copyWith(fontSize: 16.0),
+      style: Theme.of(context).textTheme.caption.copyWith(
+            fontSize: 16.0,
+            color: Theme.of(context).textTheme.title.color,
+          ),
       decoration: InputDecoration(
-        labelText: labelText,
-        errorStyle: TextStyle(
-          fontSize: 15.0,
-          height: 0.9,
-        ),
-      ),
+          labelText: labelText,
+          errorStyle: TextStyle(
+            fontSize: 15.0,
+            height: 0.9,
+          ),
+          labelStyle: TextStyle(color: Colors.grey)),
       validator: (value) {
         if (value.isEmpty || value.trim().isEmpty) {
           return errorText;

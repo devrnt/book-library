@@ -86,7 +86,11 @@ class BookDetails extends StatelessWidget {
               Text(
                 '${_book.description}',
                 style: TextStyle(
-                    color: Colors.grey.withOpacity(0.8),
+                    color: Theme.of(context)
+                        .textTheme
+                        .caption
+                        .color
+                        .withOpacity(0.85),
                     fontFamily: 'Nunito',
                     fontSize: 16.0),
               ),
@@ -97,10 +101,6 @@ class BookDetails extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.delete),
         onPressed: () => _showDeleteDialog(context, bookNotifier),
-        // () {
-        //   bookNotifier.removeBook(_book);
-        //   Navigator.of(context).pop();
-        // },
       ),
     );
   }
@@ -129,18 +129,29 @@ class BookDetails extends StatelessWidget {
   void _showDeleteDialog(
       BuildContext context, BookNotifier bookNotifier) async {
     final dialog = AlertDialog(
+      backgroundColor: Theme.of(context).primaryColor,
       title: Text('Delete book?'),
       content: Text(
         'This will delete the book from your book list',
-        style: TextStyle(color: Colors.black),
+        style: TextStyle(color: Theme.of(context).textTheme.caption.color),
       ),
       actions: [
         FlatButton(
-          child: Text('CANCEL'),
+          child: Text(
+            'CANCEL',
+            style: TextStyle(
+              color: Theme.of(context).buttonColor,
+            ),
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         FlatButton(
-          child: Text('ACCEPT'),
+          child: Text(
+            'ACCEPT',
+            style: TextStyle(
+              color: Theme.of(context).buttonColor,
+            ),
+          ),
           onPressed: () {
             bookNotifier.removeBook(_book);
             // Pop dialog

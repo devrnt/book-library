@@ -1,3 +1,4 @@
+import 'package:book_library/src/models/notifiers/theme_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
@@ -9,15 +10,31 @@ void main() => runApp(BookLibrary());
 class BookLibrary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeNotifier = ThemeNotifier();
     final bookNotifier = BookNotifier();
 
-    return ChangeNotifierProvider(
-      builder: (_) => bookNotifier,
-      child: MaterialApp(
-        title: 'Book Library',
-        theme: libraryTheme.Theme.lightTheme,
-        home: HomeScreen(),
-      ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => themeNotifier),
+        ChangeNotifierProvider(builder: (_) => bookNotifier),
+      ],
+      child: MaterialAppWithTheme(),
+    );
+  }
+}
+
+class MaterialAppWithTheme extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final themeNotifier = Provider.of<ThemeNotifier>(context);
+
+    return MaterialApp(
+      title: 'Book Library',
+      darkTheme: libraryTheme.Theme.darkTheme,
+      theme: themeNotifier.darkModeEnabled
+          ? libraryTheme.Theme.darkTheme
+          : libraryTheme.Theme.lightTheme,
+      home: HomeScreen(),
     );
   }
 }
