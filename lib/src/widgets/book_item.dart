@@ -1,8 +1,12 @@
-import 'package:book_library/src/models/book.dart';
-import 'package:book_library/src/screens/book/book_details.dart';
-import 'package:book_library/src/widgets/book_cover.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:book_library/src/models/book.dart';
+import 'package:book_library/src/models/notifiers/book_notifier.dart';
+import 'package:book_library/src/widgets/book_cover.dart';
 import 'package:book_library/src/widgets/star_rating.dart';
+import 'package:book_library/src/screens/book/book_details.dart';
+import 'package:book_library/src/style.dart';
 
 class BookItem extends StatelessWidget {
   final Book _book;
@@ -11,13 +15,20 @@ class BookItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var bookNotifier = Provider.of<BookNotifier>(context);
+
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => BookDetails(_book)));
+        if (MediaQuery.of(context).size.width > wideLayoutThreshold) {
+          bookNotifier.selectedIndex = bookNotifier.books.indexOf(_book);
+        } else {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => BookDetails(_book)));
+        }
       },
       child: Container(
+        padding: const EdgeInsets.all(8.0),
         margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 25.0),
         height: 260.0,
         child: Row(
@@ -30,6 +41,18 @@ class BookItem extends StatelessWidget {
             Flexible(
               flex: 6,
               child: Container(
+                decoration: bookNotifier.selectedIndex ==
+                            bookNotifier.books.indexOf(_book) &&
+                        MediaQuery.of(context).size.width > wideLayoutThreshold
+                    ? BoxDecoration(
+                        border: Border(
+                          right: BorderSide(
+                            width: 4.0,
+                            color: Theme.of(context).accentColor,
+                          ),
+                        ),
+                      )
+                    : null,
                 padding: const EdgeInsets.fromLTRB(20.0, 18.0, 0.0, 18.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
