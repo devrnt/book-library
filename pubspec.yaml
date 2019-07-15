@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   provider: ^3.0.0+1
   smooth_star_rating: ^1.0.3
+  flutter_speed_dial: ^1.2.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
