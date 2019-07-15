@@ -13,8 +13,16 @@ class BookNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  int _selectedIndex;
+  int get selectedIndex => _selectedIndex;
+  set selectedIndex(int value){
+    _selectedIndex = value;
+    notifyListeners();
+  }
+
   BookNotifier() {
     _books = initialBooks;
+    _selectedIndex = 0;
   }
 
   Book addBook(Book book) {

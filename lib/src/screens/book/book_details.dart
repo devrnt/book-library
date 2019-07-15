@@ -1,6 +1,10 @@
+import 'package:book_library/src/models/notifiers/theme_notifier.dart';
 import 'package:book_library/src/screens/book/book_add.dart';
+import 'package:book_library/src/style.dart';
+import 'package:book_library/src/theme/colors.dart';
 import 'package:book_library/src/widgets/book_cover.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
 import 'package:book_library/src/models/book.dart';
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
@@ -14,15 +18,17 @@ class BookDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var bookNotifier = Provider.of<BookNotifier>(context);
+    var themeNotifier = Provider.of<ThemeNotifier>(context);
 
     return Scaffold(
-      appBar: _buildAppBar(context),
+      appBar: MediaQuery.of(context).size.width < wideLayoutThreshold
+          ? _buildAppBar(context)
+          : null,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Container(
           padding: const EdgeInsets.all(20.0),
           margin: const EdgeInsets.symmetric(horizontal: 18.0),
-          // color: Colors.green,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -98,10 +104,34 @@ class BookDetails extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () => _showDeleteDialog(context, bookNotifier),
-      ),
+      floatingActionButton: MediaQuery.of(context).size.width >
+              wideLayoutThreshold
+          ? SpeedDial(
+              overlayOpacity: 0.25,
+              overlayColor:
+                  themeNotifier.darkModeEnabled ? Colors.black : Colors.white,
+              animatedIcon: AnimatedIcons.home_menu,
+              children: [
+                _buildSubFab('Remove', Icons.delete,
+                    () => _showDeleteDialog(context, bookNotifier)),
+                _buildSubFab(
+                    'Edit',
+                    Icons.edit,
+                    () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => BookAdd(book: _book)))),
+                _buildSubFab(
+                    'Add',
+                    Icons.add,
+                    () => Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => BookAdd())))
+              ],
+            )
+          : FloatingActionButton(
+              child: Icon(Icons.delete),
+              onPressed: () => _showDeleteDialog(context, bookNotifier),
+            ),
     );
   }
 
@@ -123,6 +153,15 @@ class BookDetails extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+
+  SpeedDialChild _buildSubFab(String label, IconData iconData, Function onTap) {
+    return SpeedDialChild(
+      label: label,
+      labelStyle: TextStyle(color: kTextTitleColor),
+      child: Icon(iconData),
+      onTap: onTap,
     );
   }
 
@@ -154,8 +193,6 @@ class BookDetails extends StatelessWidget {
           ),
           onPressed: () {
             bookNotifier.removeBook(_book);
-            // Pop dialog
-            Navigator.of(context).pop();
             // Pop details screen
             Navigator.of(context).pop();
           },

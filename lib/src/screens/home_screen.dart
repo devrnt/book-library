@@ -1,12 +1,12 @@
-import 'package:book_library/src/style.dart';
+import 'package:book_library/src/screens/book/book_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:book_library/src/models/notifiers/book_notifier.dart';
 import 'package:book_library/src/models/notifiers/theme_notifier.dart';
 import 'package:book_library/src/screens/book/book_add.dart';
-import 'package:book_library/src/screens/book/book_details_tablet.dart';
 import 'package:book_library/src/widgets/book_list.dart';
+import 'package:book_library/src/style.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -19,11 +19,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: _buildAppBar(context, themeNotifier),
       body: Container(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final wideScreen = constraints.maxWidth > wideLayoutThreshold;
-            if (wideScreen) {
-              return Row(
+        child: MediaQuery.of(context).size.width > wideLayoutThreshold
+            ? Row(
                 children: <Widget>[
                   Flexible(
                     flex: 4,
@@ -31,33 +28,23 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Flexible(
                     flex: 6,
-                    child: BookDetailsTablet(
+                    child: BookDetails(
                         bookNotifier.books[bookNotifier.selectedIndex]),
                   ),
                 ],
-              );
-            } else {
-              return BookList();
-            }
-          },
-        ),
+              )
+            : BookList(),
       ),
-      floatingActionButton: LayoutBuilder(
-        builder: (context, constraints) {
-          final wideScreen = constraints.maxWidth > wideLayoutThreshold;
-          if (wideScreen) {
-            return Container();
-          } else {
-            return FloatingActionButton(
-              child: Icon(Icons.add),
-              onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => BookAdd()));
-              },
-            );
-          }
-        },
-      ),
+      floatingActionButton:
+          MediaQuery.of(context).size.width < wideLayoutThreshold
+              ? FloatingActionButton(
+                  child: Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (_) => BookAdd()));
+                  },
+                )
+              : Container(),
     );
   }
 
