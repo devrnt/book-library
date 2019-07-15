@@ -14,7 +14,7 @@ class BookAdd extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add a book'),
+        title: Text(book == null ? 'Add a book' : 'Update book'),
       ),
       body: SingleChildScrollView(
         child: Container(
