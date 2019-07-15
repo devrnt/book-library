@@ -1,25 +1,39 @@
-import 'package:book_library/src/models/book.dart';
-import 'package:book_library/src/models/notifiers/book_notifier.dart';
-import 'package:book_library/src/widgets/book_item.dart';
-import 'package:book_library/src/widgets/book_list.dart';
 import 'package:flutter/material.dart';
 import 'package:image_test_utils/image_test_utils.dart';
 import 'package:provider/provider.dart';
 
+import 'package:book_library/src/models/book.dart';
+import 'package:book_library/src/models/notifiers/book_notifier.dart';
+import 'package:book_library/src/models/notifiers/theme_notifier.dart';
+import 'package:book_library/src/widgets/book_item.dart';
+import 'package:book_library/src/widgets/book_list.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  BookNotifier bookNotifier;
+  ThemeNotifier themeNotifier;
+
+  setUp(() {
+    bookNotifier = BookNotifier();
+    themeNotifier = ThemeNotifier();
+  });
+
   group('Book List Widget', () {
     testWidgets('Displays all the books supplied by the notifier',
         (tester) async {
       provideMockedNetworkImages(() async {
         // Arrange
-        var bookNotifier = BookNotifier()..books = initialBooks;
+        bookNotifier..books = initialBooks;
 
         // Act
         await tester.pumpWidget(
-          ChangeNotifierProvider<BookNotifier>(
-            builder: (_) => bookNotifier,
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider<BookNotifier>(
+                  builder: (_) => bookNotifier),
+              ChangeNotifierProvider<ThemeNotifier>(
+                  builder: (_) => themeNotifier)
+            ],
             child: MaterialApp(
               home: Scaffold(
                 body: BookList(),
@@ -36,7 +50,7 @@ void main() {
     testWidgets('Displays no books when the supplied books list is empty',
         (tester) async {
       // Arrange
-      var bookNotifier = BookNotifier()..books = [];
+      bookNotifier..books = [];
 
       // Act
       await tester.pumpWidget(
@@ -58,12 +72,18 @@ void main() {
         (tester) async {
       provideMockedNetworkImages(() async {
         // Arrange
-        var bookNotifier = BookNotifier()..books = initialBooks;
+        bookNotifier..books = initialBooks;
 
         // Act
         await tester.pumpWidget(
-          ChangeNotifierProvider<BookNotifier>(
-            builder: (_) => bookNotifier,
+          MultiProvider(
+            providers: [
+              ChangeNotifierProvider<BookNotifier>(
+                builder: (_) => bookNotifier,
+              ),
+              ChangeNotifierProvider<ThemeNotifier>(
+                  builder: (_) => themeNotifier),
+            ],
             child: MaterialApp(
               home: Scaffold(
                 body: BookList(),
