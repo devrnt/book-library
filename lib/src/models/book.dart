@@ -8,6 +8,11 @@ class Book {
 
   Book(this.title, this.author, this.description, this.coverUrl, this.category,
       this.rating);
+
+  factory Book.fromJson(Map<String, dynamic> json) {
+    return Book(json['title'], json['author'], json['description'],
+        json['coverUrl'], json['category'], json['rating']);
+  }
 }
 
 final initialBooks = [
