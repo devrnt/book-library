@@ -1,5 +1,7 @@
 import 'package:book_library/src/models/book.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 /// Class used to manage the state in the app
 /// Contains all the books that are available
@@ -13,15 +15,22 @@ class BookNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool _loading = true;
+  bool get loading => _loading;
+  set loading(bool value) {
+    _loading = value;
+    notifyListeners();
+  }
+
   int _selectedIndex;
   int get selectedIndex => _selectedIndex;
-  set selectedIndex(int value){
+  set selectedIndex(int value) {
     _selectedIndex = value;
     notifyListeners();
   }
 
   BookNotifier() {
-    _books = initialBooks;
+    fetchBooks();
     _selectedIndex = 0;
   }
 
@@ -49,5 +58,19 @@ class BookNotifier extends ChangeNotifier {
     books[index] = newBook;
     notifyListeners();
     return newBook;
+  }
+
+  void fetchBooks() async {
+    loading = true;
+    final client = http.Client();
+
+    final response = await client.get('http://10.0.2.2:8080');
+    final books = parseBooks(jsonDecode(response.body));
+    _books = books;
+    loading = false;
+  }
+
+  List<Book> parseBooks(dynamic responseBody) {
+    return responseBody.map<Book>((json) => Book.fromJson(json)).toList();
   }
 }

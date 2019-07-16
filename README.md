@@ -36,6 +36,10 @@ This Flutter app contains some simple widget tests to demonstrate the way you sh
 This will ensure the quality of your application.
 
 ## Getting Started
+Run backend
+```
+dart ./backend/main.dart
+```
 
 Clone this repo and look into the source code
 ```

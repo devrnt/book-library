@@ -8,21 +8,27 @@ class BookList extends StatelessWidget {
   Widget build(BuildContext context) {
     var bookNotifier = Provider.of<BookNotifier>(context);
 
-    return ListView.separated(
-      physics: BouncingScrollPhysics(),
-      separatorBuilder: ((context, index) {
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 22.0),
-          child: Divider(
-            color: Colors.grey.withOpacity(0.3),
-            height: 18.0,
-          ),
-        );
-      }),
-      itemCount: bookNotifier.books.length,
-      itemBuilder: ((context, index) {
-        return BookItem(bookNotifier.books[index]);
-      }),
-    );
+    if (bookNotifier.loading) {
+      return Center(
+        child: CircularProgressIndicator()
+      );
+    } else {
+      return ListView.separated(
+        physics: BouncingScrollPhysics(),
+        separatorBuilder: ((context, index) {
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 22.0),
+            child: Divider(
+              color: Colors.grey.withOpacity(0.3),
+              height: 18.0,
+            ),
+          );
+        }),
+        itemCount: bookNotifier.books.length,
+        itemBuilder: ((context, index) {
+          return BookItem(bookNotifier.books[index]);
+        }),
+      );
+    }
   }
 }
