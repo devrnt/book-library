@@ -12,6 +12,8 @@ class BookCover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var themeNotifier = Provider.of<ThemeNotifier>(context);
+    final assetPath =
+        'assets/images/book-cover-placeholder-${themeNotifier.darkModeEnabled ? 'dark' : 'light'}.png';
 
     return Container(
       height: height,
@@ -30,7 +32,7 @@ class BookCover extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
         child: FadeInImage.assetNetwork(
-          placeholder: 'assets/images/book-cover-placeholder.png',
+          placeholder: assetPath,
           image: url,
           fit: boxFit,
           alignment: Alignment.topCenter,
