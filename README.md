@@ -26,6 +26,7 @@ So in short this project contains following use cases:
 * Adaptive widgets to display on both a phone and tablet (master and details view)
 * Use of assets
 * Use of external fonts
+* Logo generations by `flutter_launcher_icons` package
 * Flutter version: `1.7.8+hotfix.3`
 
 Design inspired by [Shirish Shikhrakar ](https://dribbble.com/shots/6552218-Reading-Application)
@@ -59,3 +60,4 @@ flutter test
 * [image_test_utils](https://pub.dev/packages/image_test_utils)
 * [smooth_star_rating](https://pub.dev/packages/smooth_star_rating)
 * [flutter_speed_dial](https://pub.dev/packages/flutter_speed_dial)
+* [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
