@@ -30,7 +30,7 @@ class StarRating extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
-            '$rating',
+            '${rating.toStringAsFixed(1)}',
             style: TextStyle(
               color: kYellow,
               fontSize: 16.0,

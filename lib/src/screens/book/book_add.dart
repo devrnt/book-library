@@ -40,8 +40,15 @@ class _AddBookFormState extends State<AddBookForm> {
   var _title = '';
   var _author = '';
   var _description = '';
+  var _rating;
   var _coverUrl = '';
   var _category = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _rating = widget.book?.rating ?? 0.0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +89,22 @@ class _AddBookFormState extends State<AddBookForm> {
             initialValue: widget.book?.category,
             onSaved: (value) => _category = value,
           ),
+          InputDecorator(
+            decoration: InputDecoration(
+              labelText: 'Rating',
+              labelStyle: TextStyle(color: Colors.grey),
+              suffixIcon: Chip(
+                label: Text(_rating.toStringAsFixed(1)),
+              ),
+            ),
+            child: Slider(
+              value: _rating.roundToDouble(),
+              min: 0.0,
+              max: 10.0,
+              divisions: 10,
+              onChanged: (value) => setState(() => _rating = value),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 22.0),
             child: ConfirmButton(
@@ -89,12 +112,10 @@ class _AddBookFormState extends State<AddBookForm> {
               onPressed: () {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
-                  final book = Book(
-                      _title, _author, _description, _coverUrl, _category, 7.0);
+                  final book = Book(_title, _author, _description, _coverUrl,
+                      _category, _rating);
 
                   if (widget.book == null) {
-                    // TODO: replace rating with a Slider
-
                     bookNotifier.addBook(book);
                     Navigator.pop(context);
                   } else {
