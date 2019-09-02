@@ -15,7 +15,7 @@ class BookNotifier extends ChangeNotifier {
 
   int _selectedIndex;
   int get selectedIndex => _selectedIndex;
-  set selectedIndex(int value){
+  set selectedIndex(int value) {
     _selectedIndex = value;
     notifyListeners();
   }

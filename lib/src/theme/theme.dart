@@ -99,8 +99,7 @@ class Theme {
       FloatingActionButtonThemeData(
           backgroundColor: kAccentColorDark, foregroundColor: Colors.white);
 
-
-static AppBarTheme get _appBarThemeDark {
+  static AppBarTheme get _appBarThemeDark {
     return AppBarTheme(
       elevation: 0,
       color: kPrimaryColorDark,

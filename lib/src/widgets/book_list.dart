@@ -1,9 +1,15 @@
-import 'package:book_library/src/models/notifiers/book_notifier.dart';
-import 'package:book_library/src/widgets/book_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:book_library/src/models/notifiers/book_notifier.dart';
+import 'package:book_library/src/widgets/book_item.dart';
+import 'package:book_library/src/models/book.dart';
+
 class BookList extends StatelessWidget {
+  final List<Book> _books;
+
+  BookList({books}) : _books = books;
+
   @override
   Widget build(BuildContext context) {
     var bookNotifier = Provider.of<BookNotifier>(context);
@@ -19,9 +25,9 @@ class BookList extends StatelessWidget {
           ),
         );
       }),
-      itemCount: bookNotifier.books.length,
+      itemCount: _books?.length ?? bookNotifier.books.length,
       itemBuilder: ((context, index) {
-        return BookItem(bookNotifier.books[index]);
+        return BookItem(_books?.elementAt(index) ?? bookNotifier.books[index]);
       }),
     );
   }
