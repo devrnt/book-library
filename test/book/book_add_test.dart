@@ -17,7 +17,7 @@ void main() {
       // Act
       await tester.pumpWidget(
         ChangeNotifierProvider<BookNotifier>(
-          builder: (_) => bookNotifier,
+          create: (_) => bookNotifier,
           child: MaterialApp(
             home: Scaffold(
               body: BookAdd(),
@@ -37,7 +37,7 @@ void main() {
       // Act
       await tester.pumpWidget(
         ChangeNotifierProvider<BookNotifier>(
-          builder: (_) => bookNotifier,
+          create: (_) => bookNotifier,
           child: MaterialApp(
             home: Scaffold(
               body: BookAdd(),

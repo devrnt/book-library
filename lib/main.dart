@@ -15,8 +15,8 @@ class BookLibrary extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (_) => themeNotifier),
-        ChangeNotifierProvider(builder: (_) => bookNotifier),
+        ChangeNotifierProvider(create: (_) => themeNotifier),
+        ChangeNotifierProvider(create: (_) => bookNotifier),
       ],
       child: MaterialAppWithTheme(),
     );

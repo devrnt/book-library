@@ -19,7 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^3.1.0
+  provider: ^4.0.2
   smooth_star_rating: ^1.0.3
   flutter_speed_dial: ^1.2.1
 
@@ -43,18 +43,18 @@ flutter:
     - assets/images/book-cover-placeholder-light.png
     - assets/images/book-cover-placeholder-dark.png
 
-  fonts: 
-  - family: Nunito
-    fonts:
-      - asset: assets/fonts/Nunito/Nunito-ExtraBold.ttf
-        weight: 900
-      - asset: assets/fonts/Nunito/Nunito-Bold.ttf
-        weight: 800
-      - asset: assets/fonts/Nunito/Nunito-SemiBold.ttf
-        weight: 600
-      - asset: assets/fonts/Nunito/Nunito-Regular.ttf
-        weight: 400
-      - asset: assets/fonts/Nunito/Nunito-Light.ttf
-        weight: 300
-      - asset: assets/fonts/Nunito/Nunito-ExtraLight.ttf
-        weight: 200
+  fonts:
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/Nunito/Nunito-ExtraBold.ttf
+          weight: 900
+        - asset: assets/fonts/Nunito/Nunito-Bold.ttf
+          weight: 800
+        - asset: assets/fonts/Nunito/Nunito-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Nunito/Nunito-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Nunito/Nunito-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Nunito/Nunito-ExtraLight.ttf
+          weight: 200

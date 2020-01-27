@@ -29,10 +29,9 @@ void main() {
         await tester.pumpWidget(
           MultiProvider(
             providers: [
-              ChangeNotifierProvider<BookNotifier>(
-                  builder: (_) => bookNotifier),
+              ChangeNotifierProvider<BookNotifier>(create: (_) => bookNotifier),
               ChangeNotifierProvider<ThemeNotifier>(
-                  builder: (_) => themeNotifier)
+                  create: (_) => themeNotifier)
             ],
             child: MaterialApp(
               home: Scaffold(
@@ -55,7 +54,7 @@ void main() {
       // Act
       await tester.pumpWidget(
         ChangeNotifierProvider<BookNotifier>(
-          builder: (_) => bookNotifier,
+          create: (_) => bookNotifier,
           child: MaterialApp(
             home: Scaffold(
               body: BookList(),
@@ -79,10 +78,10 @@ void main() {
           MultiProvider(
             providers: [
               ChangeNotifierProvider<BookNotifier>(
-                builder: (_) => bookNotifier,
+                create: (_) => bookNotifier,
               ),
               ChangeNotifierProvider<ThemeNotifier>(
-                  builder: (_) => themeNotifier),
+                  create: (_) => themeNotifier),
             ],
             child: MaterialApp(
               home: Scaffold(
